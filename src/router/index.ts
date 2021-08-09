@@ -17,10 +17,10 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/first",
-    name: "First",
+    path: "/patients",
+    name: "Patients",
     component: () =>
-      import("../views/First.vue"),
+      import("../views/Patients.vue"),
   }
 ];
 
