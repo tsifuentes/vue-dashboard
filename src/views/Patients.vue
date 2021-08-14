@@ -1,6 +1,9 @@
 <template>
     <h1>Patients</h1>
-    <Card v-for="item in items" :key="item.name" :msg="item.name + ' ' + item.last_name" />
+    <button v-on:click="show">{{buttonText}}</button>
+    <div v-if="seen">
+        <Card v-for="item in items" :key="item.name" :msg="item.name + ' ' + item.last_name" />
+    </div>
 </template>
 
 <script lang="ts">
@@ -13,8 +16,15 @@ import Card from '@/components/Card.vue';
     },
 })
 export default class Patients extends Vue {
-    items = [{message: 'xxxxx'}, {message: 'xxxxx'}];
+    seen = true;
+    items = [];
+    buttonText = "Hide";
     
+    show = () => {
+        this.seen = !this.seen;
+        this.buttonText = !this.seen ? "Show": "Hide";
+    };
+
     fetchData = () => {
         fetch('http://localhost:5000/patients')
         .then(response => response.json())
@@ -22,7 +32,7 @@ export default class Patients extends Vue {
     };
 
     async created(){
-    this.fetchData();
+        this.fetchData();
     }
 } 
 
