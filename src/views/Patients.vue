@@ -1,5 +1,6 @@
 <template>
     <h1>Patients</h1>
+    <router-link to="/new-patient">New Patient</router-link>
     <button v-on:click="show">{{buttonText}}</button>
     <div v-if="seen">
         <Card v-for="item in items" :key="item.name" :msg="item.name + ' ' + item.last_name" />
