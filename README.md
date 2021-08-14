@@ -1,6 +1,6 @@
 # vue-dashboard
 
-## Project setup
+## Project setup first
 ```
 npm install
 ```
