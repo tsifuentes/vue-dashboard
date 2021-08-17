@@ -4,36 +4,36 @@
         <div class="form">
             <label>
                 Name:
-                <input v-model="name"/>
+                <input v-model="patient.name"/>
             </label>
             <label>
                 Last name:
-                <input v-model="lastName"/>
+                <input v-model="patient.lastName"/>
             </label>
             <label>
                 Phone:
-                <input v-model="phone" max-length="9" min-length="9"/>
+                <input v-model="patient.phone" max-length="9" min-length="9"/>
             </label>
             <label>
                 Birthdate:
-                <input v-model="birthdate" type="date"/>
+                <input v-model="patient.birthdate" type="date"/>
             </label>
             <label>
                 Address:
-                <input v-model="address"/>
+                <input v-model="patient.address"/>
             </label>
             <label>
                 Record:
-                <input v-model="record"/>
+                <input v-model="patient.record"/>
             </label>
         </div>
         <div class="card">
             <h3>Card:</h3>
-            <div>{{fullName}}</div>
-            <div>{{phone}}</div>
-            <div>{{birthdate}}</div>
-            <div>{{address}}</div>
-            <div>{{record}}</div>
+            <div>{{patient.fullName}}</div>
+            <div>{{patient.phone}}</div>
+            <div>{{patient.birthdate}}</div>
+            <div>{{patient.address}}</div>
+            <div>{{patient.record}}</div>
         </div>
     </div>
     <button v-on:click="savePatient">Save</button>
@@ -43,16 +43,26 @@
 import {Vue} from 'vue-class-component';
 
 export default class Patient extends Vue {
-    name = "Thomas";
-    lastName = "Sifuentes";
-    phone = "";
-    birthdate = "";
-    address = "";
-    record = "";
-    fullName="";
+    patient = {
+        name: "",
+        lastName: "",
+        phone: "",
+        birthdate: "",
+        address: "",
+        record: "",
+        fullName: "",
+    }
 
-    savePatient = () => {
-        this.fullName = `${this.name} ${this.lastName}`;
+    savePatient = async () => {
+        this.patient.fullName = `${this.patient.name} ${this.patient.lastName}`;
+        await fetch("http://localhost:5000/patient", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({data: this.patient}),
+        });
+
     };
 }
 </script>

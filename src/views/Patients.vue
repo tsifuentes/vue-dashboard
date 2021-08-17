@@ -26,8 +26,8 @@ export default class Patients extends Vue {
         this.buttonText = !this.seen ? "Show": "Hide";
     };
 
-    fetchData = () => {
-        fetch('http://localhost:5000/patients')
+    fetchData = async () => {
+        await fetch('http://localhost:5000/patient?mem=true')
         .then(response => response.json())
         .then(data => this.items = data.data);
     };
