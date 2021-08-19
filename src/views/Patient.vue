@@ -60,7 +60,7 @@ export default class Patient extends Vue {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({data: this.patient}),
+            body: JSON.stringify(this.patient),
         });
 
     };
